@@ -165,13 +165,7 @@ def rounds(buf, x):
 	
     return buf
    
-	
-	
-def main():
-    print "ripemd-160"
-    data = ""
-    args = getArgs()
-    data = readFile(args.inFile)
+def calc_ripemd160(data):
     data = [ord(i) for i in data]
 	
     # Шаг 1 Выравнивание потока
@@ -206,6 +200,15 @@ def main():
     res = ""
     for i in buf:
         res += "{:08x}".format(toLittleEndian(i))
+		
+    return res		
+	
+def main():
+    print "ripemd-160"
+    data = ""
+    args = getArgs()
+    data = readFile(args.inFile)
+    res = calc_ripemd160(data)
     print "hash: ", res
     writeFile(args.outFile, res)
 	
